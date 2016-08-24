@@ -34,14 +34,25 @@
                 ssnWrapper.append(newNode);
                 //Obscure value
                 newNode.data(candy.dataValueName, maskedValue);
-                var obscuredValue = maskedValue.replace(/^\d{3}-\d{2}/, candy.displayMaskReplace);
+                var obscuredValue = obscureValue(maskedValue);
                 newNode.val(obscuredValue);
                 newNode.each(candy.ssnMask);
             }
         }
 
-        candy.ssnValue = function () {
-            var value = $(this).data(candy.dataValueName);
+        var obscureValue = function(value) {
+          return value.replace(/^\d{3}-\d{2}/, candy.displayMaskReplace);
+        };
+
+        candy.ssnValue = function (value) {
+            if (value === undefined) {
+                //Get
+                value = $(this).data(candy.dataValueName);
+            } else {
+                //Set
+                $(this).data(candy.dataValueName, value);
+                $(this).val(obscureValue(value));
+            }
             return value ? value : '';
         }
 
