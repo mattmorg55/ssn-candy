@@ -9,6 +9,8 @@
         candy.inputmaskJitMasking = true;
         candy.displayMaskRegex = '';
         candy.displayMaskReplace = 'XXX-XX';
+        candy.customjQueryBlurEvent = "ssn-candy-mask:blur";
+        candy.customjQueryFocusEvent = "ssn-candy-mask:focus";
 
         candy.ssnFocus = function () {
             var value = $(this).data(candy.dataValueName);
@@ -21,6 +23,11 @@
                 "placeholder": candy.inputmaskPlaceholder,
                 jitMasking: candy.inputmaskJitMasking
             });
+            
+            var ssnWrapper = $(this).parent();
+            if (ssnWrapper) {
+                ssnWrapper.trigger("ssn-candy-mask:focus");
+            }
         }
 
         candy.ssnBlur = function ssnBlur() {
@@ -37,6 +44,8 @@
                 var obscuredValue = obscureValue(maskedValue);
                 newNode.val(obscuredValue);
                 newNode.each(candy.ssnMask);
+
+                ssnWrapper.trigger("ssn-candy-mask:blur");
             }
         }
 
