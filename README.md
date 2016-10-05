@@ -8,7 +8,7 @@ If you are going to attach any event handlers to the focus
 or blur events:
   * attach to the parent of the masked element
   * attach to a custom event "ssn-candy-mask:blur" or "ssn-candy-mask:focus"
-  * attach using jQuery, inline or DOM attachment will not work
+  * attach using jQuery--inline or DOM attachment will not work
 
 <p id="p1"></p>
 <p><input id="ssn" class="ssn-candy-mask" type="text"></p>
